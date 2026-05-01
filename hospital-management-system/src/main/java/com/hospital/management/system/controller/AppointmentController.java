@@ -20,7 +20,7 @@ public class AppointmentController {
 
     @GetMapping("/allAppointments")
     public ResponseEntity<List<Appointment>> getAllAppointments() {
-        List<Appointment>appointments = appointmentService.getAllAppointments();
+        List<Appointment> appointments = appointmentService.getAllAppointments();
         return new ResponseEntity<>(appointments, HttpStatus.OK);
     }
 
@@ -31,7 +31,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody AppointmentDetails appointmentDetails){
+    public ResponseEntity<Appointment> addAppointment(@Valid @RequestBody AppointmentDetails appointmentDetails) {
         Appointment appointment = appointmentService.addAppointment(appointmentDetails);
         return new ResponseEntity<>(appointment, HttpStatus.CREATED);
     }
