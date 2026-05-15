@@ -12,10 +12,6 @@ import java.time.format.DateTimeFormatter;
 @RestControllerAdvice
 public class PatientExceptionController {
 
-    private String getCurrentTimestamp() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    }
-
     @ExceptionHandler(PatientNotFoundException.class)
     public ResponseEntity<PatientErrorResponse> handlePatientNotFoundException(PatientNotFoundException exception) {
         PatientErrorResponse error = new PatientErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage(), getCurrentTimestamp());
@@ -32,5 +28,8 @@ public class PatientExceptionController {
 
         PatientErrorResponse errorResponse = new PatientErrorResponse(HttpStatus.BAD_REQUEST.value(), errorMessage, getCurrentTimestamp());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+    private String getCurrentTimestamp() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
